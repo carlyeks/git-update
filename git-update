@@ -99,8 +99,6 @@ def update(repo):
     return True
 
 (repos, alreadyRun) = repostorefresh()
-print(repos)
-print(alreadyRun)
 for repo in repos:
     if update(repo):
         t = (repo, datetime.now())
@@ -111,4 +109,3 @@ with open(os.path.expanduser('~/.update.lastruns'), 'w') as lastruns:
     for (repo, time) in alreadyRun:
         lastruns.write("{0}\t{1}\n".format(repo, time.strftime('%s.%f')))
 
-print(alreadyRun)
