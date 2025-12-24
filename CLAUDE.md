@@ -5,7 +5,7 @@
 **git-update** is a Python utility that automatically updates git repositories at specified intervals. It's designed to be run periodically (e.g., at login or via cron) to keep multiple git repositories synchronized with their remotes.
 
 **Repository:** git-update
-**Primary Language:** Python 2
+**Primary Language:** Python 3
 **License:** Apache License 2.0
 **Author:** Carl Yeksigian (Copyright 2013)
 
@@ -16,8 +16,10 @@ This is a minimal, focused project with the following structure:
 ```
 .
 ├── git-update          # Main executable Python script
+├── requirements.txt    # Python dependencies
 ├── README.md           # User-facing documentation
 ├── LICENSE             # Apache 2.0 license
+├── CLAUDE.md          # AI assistant documentation
 └── .gitignore         # Standard Python .gitignore
 ```
 
@@ -25,7 +27,7 @@ This is a minimal, focused project with the following structure:
 
 #### `git-update` (Primary Executable)
 - **Location:** `/git-update` (root of repository)
-- **Type:** Python 2 script with shebang (`#!/usr/bin/env python2`)
+- **Type:** Python 3 script with shebang (`#!/usr/bin/env python3`)
 - **Purpose:** Main and only script that handles all repository update logic
 - **Dependencies:**
   - `git` - GitPython library for git operations
@@ -108,10 +110,10 @@ Timestamps are in Unix epoch format with microseconds.
 
 ### Style Guidelines
 
-1. **Python 2 Syntax:** This codebase uses Python 2, which is end-of-life
-   - Use `print()` as a statement, not a function
+1. **Python 3 Syntax:** This codebase uses Python 3
+   - Use `print()` as a function with parentheses
    - String formatting uses `.format()` method
-   - No type hints
+   - Type hints are not currently used but can be added if desired
 
 2. **Naming Conventions:**
    - Functions: `lowercase` or `camelCase` (inconsistent - uses both)
@@ -168,18 +170,18 @@ All unit types add a fixed value of 1 instead of using the parsed numeric value.
 2. **File I/O:** No handling for missing or malformed config files
 3. **Path Expansion:** No validation that repository paths exist
 
-### Python 2 End-of-Life
+### Python 3 Migration Complete
 
-The script explicitly requires Python 2 (`#!/usr/bin/env python2`), which reached end-of-life on January 1, 2020. This is a significant technical debt.
+The script has been migrated to Python 3 (`#!/usr/bin/env python3`). All functionality is compatible with modern Python versions.
 
 ## Development Guidelines for AI Assistants
 
 ### When Making Changes
 
-1. **Preserve Python 2 Compatibility:**
-   - Unless explicitly asked to migrate to Python 3, maintain Python 2 syntax
-   - Don't use Python 3-only features (type hints, f-strings, etc.)
-   - Test changes work with Python 2.7
+1. **Maintain Python 3 Compatibility:**
+   - Use Python 3 syntax and features
+   - Python 3-only features (type hints, f-strings, etc.) are acceptable
+   - Test changes work with Python 3.x
 
 2. **Maintain Backward Compatibility:**
    - Don't change the format of configuration files without migration path
@@ -210,14 +212,14 @@ if "weeks" in parts and parts["weeks"]:
     weeks = weeks + int(parts["weeks"])
 ```
 
-#### Python 3 Migration
+#### Future Enhancements
 
-If asked to migrate to Python 3:
-1. Update shebang: `#!/usr/bin/env python3`
-2. Ensure all imports are Python 3 compatible (GitPython is compatible)
-3. Update timestamp parsing - `strftime('%s')` behavior may differ
-4. Test with Python 3.x environment
-5. Update README.md to reflect Python 3 requirement
+Potential improvements for Python 3:
+1. Add type hints for better code documentation
+2. Consider using f-strings for string formatting
+3. Add more robust error handling with specific exception types
+4. Consider using pathlib for path operations
+5. Add logging instead of print statements
 
 #### Adding Error Handling
 
@@ -280,11 +282,12 @@ be interpreted as 1 week.
 
 - **GitPython** (`git` module): Git repository manipulation
   - Not in standard library, must be installed via pip
-  - Installation: `pip install GitPython` (Python 2) or `pip3 install GitPython` (Python 3)
+  - Installation: `pip3 install -r requirements.txt`
+  - Minimum version: 3.1.0
 
 ### System Requirements
 
-- Python 2.7 (or Python 3 if migrated)
+- Python 3.x (tested with Python 3.6+)
 - Git installed and available in PATH
 - Unix-like environment (uses `~` expansion, designed for cron)
 

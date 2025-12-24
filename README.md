@@ -2,6 +2,16 @@
 
 Tool to update git repositories at intervals
 
+## Requirements
+
+- Python 3.x
+- GitPython library
+
+Install dependencies:
+```bash
+pip3 install -r requirements.txt
+```
+
 ## Configuration
 
 ### ~/.update.repos
